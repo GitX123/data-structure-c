@@ -29,12 +29,23 @@ int pop() {
 }
 
 void shuffle(bool *card, int len, int num) {
+    int card_num;
+    srand(time(NULL));
     
     // reset indicator
     for(int i=0; i<len; i++)
         card[i] = false;
 
-    // push card value into stack
+    // push card number into stack
+    int i = 0;
+    while(i < num) {
+        card_num = rand() % len;
+        if(!card[card_num]) {
+            push(card_num);
+            card[card_num] == true;
+            i++;
+        }
+    }
 }
 
 int main(int argc, char *argv) {
@@ -43,18 +54,19 @@ int main(int argc, char *argv) {
 
     shuffle(card, 52, 52);
 
-    printf("\t1 \t2 \t3 \t4 \n");
+    printf("1\t2\t3\t4\n");
     printf("===========================\n");
     // deal everyone 5 cards
     for(int i=0; i<5; i++) {
         card_num = pop();
-        printf(" [%c%2d] ", card_num / 13 + 3, card_num % 13 + 1);
+        // TODO characters for suits
+        printf("[%c%2d]\t", card_num / 13 + 3, card_num % 13 + 1);
         card_num = pop();
-        printf(" [%c%2d] ", card_num / 13 + 3, card_num % 13 + 1);
+        printf("[%c%2d]\t", card_num / 13 + 3, card_num % 13 + 1);
         card_num = pop();
-        printf(" [%c%2d] ", card_num / 13 + 3, card_num % 13 + 1);
+        printf("[%c%2d]\t", card_num / 13 + 3, card_num % 13 + 1);
         card_num = pop();
-        printf(" [%c%2d] ", card_num / 13 + 3, card_num % 13 + 1);
+        printf("[%c%2d]\t", card_num / 13 + 3, card_num % 13 + 1);
         printf("\n");
     }
 
